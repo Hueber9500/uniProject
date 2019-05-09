@@ -17,6 +17,15 @@ var UniStore = assign({}, EventEmitter.prototype, {
     },
     getServedClients: function(){
         return Utils._clone(servedClients);
+    },
+    addChangeListener: function(callback){
+        this.on(CHANGE_EVENT, callback);
+    },
+    removeChangeListener: function(callback){
+        this.removeListener(CHANGE_EVENT, callback);
+    },
+    emitChange: function(){
+        this.emit(CHANGE_EVENT);
     }
 });
 
@@ -25,10 +34,16 @@ Dispatcher.register(function(action){
     switch(action.actionType){
         case ActionTypes.LOAD_CONDUCTING_INFO :{
             conductingInfo = action.data;
+            UniStore.emitChange();
             break;
         }
         case ActionTypes.LOAD_ALL_DATA :{
             servedClients = action.data;
+            UniStore.emitChange();
+            break;
+        }
+        case ActionTypes.CREATE_OOP: {
+            UniStore.emitChange();
             break;
         }
     }

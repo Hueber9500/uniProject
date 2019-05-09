@@ -26,6 +26,7 @@ var routes = (
 
         <Route name="sbd" handler={require('./components/uni/sbd')} />
         <Route name="oop" handler={require('./components/uni/oop')} />
+        <Route name="addRow" handler={require('./components/uni/oopAdd')} />
     </Route>
 );
 

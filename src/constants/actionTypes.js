@@ -13,5 +13,8 @@ module.exports = keyMirror({
     LOAD_CONDUCTING_INFO: null,
     LOAD_ALL_DATA: null,
     LOAD_SERVED_CLIENTS_BY_NAME: null,
-    LOAD_TOTAL_TIME_SERVED_CLIENTS_BY_NAME: null
+    LOAD_TOTAL_TIME_SERVED_CLIENTS_BY_NAME: null,
+    DELETE_OOP: null,
+    CREATE_OOP: null,
+    UPDATE_OOP: null
 });

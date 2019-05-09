@@ -5,6 +5,7 @@ var UniStore = require('../../stores/uniStore');
 var HttpActions = require('../../actions/httpActions');
 var Router = require('react-router');
 var toastr = require('toastr');
+var Link = Router.Link;
 
 var OOP = React.createClass({
     
@@ -14,8 +15,16 @@ var OOP = React.createClass({
             data: UniStore.getServedClients()
         };
     },
+    componentWillMount: function(){
+        UniStore.addChangeListener(this._onChange);
+    },
+
+    _onChange: function(){
+        this.setState({data: UniStore.getServedClients()});
+    },
 
     componentWillUnmount: function(){
+        UniStore.removeChangeListener(this._onChange);
         HttpActions.loadServedClients();
     },
 
@@ -32,23 +41,35 @@ var OOP = React.createClass({
                 toastr.success('Seller ' + name + ' has ' + response.data + ' minutes total time serving clients');
             });
     },
-    render: function(){
 
+    delete: function(id, event){
+        event.preventDefault();
+
+        HttpActions.deletePromise(id)
+            .then(function(response){
+                HttpActions.loadServedClients();
+                toastr.success('row deleted');
+                });     
+    },
+
+    render: function(){
         var mapRow = function(data){
             return (
             <tr>
-                <td><a href="#" onClick ={this.callApiMethods.bind(this, data.seller)}>{data.seller}</a></td>
+                <td><a href="#" onClick = {this.delete.bind(this, data.id)}>Delete</a></td>
+                <td><a href="#" onClick = {this.callApiMethods.bind(this, data.seller)}>{data.seller}</a></td>
                 <td>{data.client}</td>
                 <td>{data.minutes}</td>
             </tr> );
         };
 
-        console.log("in render of oop component", this.state.data);
         return (
             <div>
                 <h1>OOP 2 component</h1>
+                <Link className="btn btn-default" to="addRow">Add</Link>
                 <table className="table">
                 <thead>
+                    <th></th>
                     <th>Seller</th>
                     <th>Client</th>
                     <th>Working time</th>

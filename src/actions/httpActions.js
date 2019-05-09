@@ -17,8 +17,81 @@ var HttpActions = {
         });
     },
 
+    delete: function(id){
+        axios.delete(url + 'oop/' + id)
+            .then(function(response){
+                Dispatcher.dispatch({
+                    actionType: ActionTypes.DELETE_OOP
+                });
+            });
+    },
+
+    deletePromise: function(id){
+        return axios.delete(url + 'oop/' + id);
+    },
+
+    update: function(id, oopRow){
+        axios.put(url + 'oop/' + id, {
+            seller: oopRow.seller,
+            client: oopRow.client,
+            minutes: oopRow.minutes
+        }).then(function(response){
+            Dispatcher.dispatch({
+                actionType: ActionTypes.UPDATE_OOP
+            });
+        });
+    },
+
+    add: function(oopRow){
+        var destinationUrl = url + 'oop';
+        console.log('add row', oopRow, destinationUrl);
+        axios({
+            method: 'post',
+            url: destinationUrl,
+            headers: {},
+            data: {
+                seller: oopRow.seller,
+                client: oopRow.client,
+                minutes: oopRow.minutes
+            }
+        }).then(function(response){
+            Dispatcher.dispatch({
+                actionType: ActionTypes.CREATE_OOP
+            });
+        });
+    },
+
+    addPromise: function(oopRow){
+        var destinationUrl = url + 'oop';
+        console.log('add row', oopRow, destinationUrl);
+        return axios({
+            method: 'post',
+            url: destinationUrl,
+            headers: {},
+            data: {
+                seller: oopRow.seller,
+                client: oopRow.client,
+                minutes: oopRow.minutes
+            }
+        }).then(function(response){
+            Dispatcher.dispatch({
+                actionType: ActionTypes.CREATE_OOP
+            });
+        });
+    },
+
     loadServedClients: function(){
         axios.get(url + 'oop')
+            .then(function(response){
+                Dispatcher.dispatch({
+                    actionType: ActionTypes.LOAD_ALL_DATA,
+                    data: response.data
+                });
+        });
+    },
+
+    loadServedClientsPromise: function(){
+        return axios.get(url + 'oop')
             .then(function(response){
                 Dispatcher.dispatch({
                     actionType: ActionTypes.LOAD_ALL_DATA,

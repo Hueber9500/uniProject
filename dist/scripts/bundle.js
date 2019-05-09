@@ -51754,7 +51754,7 @@ var AuthorActions = {
 
 module.exports = AuthorActions;
 
-},{"../api/authorApi":234,"../constants/actionTypes":256,"../dispatcher/appDispatcher":257}],231:[function(require,module,exports){
+},{"../api/authorApi":234,"../constants/actionTypes":257,"../dispatcher/appDispatcher":258}],231:[function(require,module,exports){
 "use strict";
 
 var Dispatcher = require('../dispatcher/appDispatcher');
@@ -51791,7 +51791,7 @@ var CourseActions = {
 
 module.exports = CourseActions;
 
-},{"../api/courseApi":236,"../constants/actionTypes":256,"../dispatcher/appDispatcher":257}],232:[function(require,module,exports){
+},{"../api/courseApi":236,"../constants/actionTypes":257,"../dispatcher/appDispatcher":258}],232:[function(require,module,exports){
 "use strict";
 
 var Dispatcher = require('../dispatcher/appDispatcher');
@@ -51811,8 +51811,81 @@ var HttpActions = {
         });
     },
 
+    delete: function(id){
+        axios.delete(url + 'oop/' + id)
+            .then(function(response){
+                Dispatcher.dispatch({
+                    actionType: ActionTypes.DELETE_OOP
+                });
+            });
+    },
+
+    deletePromise: function(id){
+        return axios.delete(url + 'oop/' + id);
+    },
+
+    update: function(id, oopRow){
+        axios.put(url + 'oop/' + id, {
+            seller: oopRow.seller,
+            client: oopRow.client,
+            minutes: oopRow.minutes
+        }).then(function(response){
+            Dispatcher.dispatch({
+                actionType: ActionTypes.UPDATE_OOP
+            });
+        });
+    },
+
+    add: function(oopRow){
+        var destinationUrl = url + 'oop';
+        console.log('add row', oopRow, destinationUrl);
+        axios({
+            method: 'post',
+            url: destinationUrl,
+            headers: {},
+            data: {
+                seller: oopRow.seller,
+                client: oopRow.client,
+                minutes: oopRow.minutes
+            }
+        }).then(function(response){
+            Dispatcher.dispatch({
+                actionType: ActionTypes.CREATE_OOP
+            });
+        });
+    },
+
+    addPromise: function(oopRow){
+        var destinationUrl = url + 'oop';
+        console.log('add row', oopRow, destinationUrl);
+        return axios({
+            method: 'post',
+            url: destinationUrl,
+            headers: {},
+            data: {
+                seller: oopRow.seller,
+                client: oopRow.client,
+                minutes: oopRow.minutes
+            }
+        }).then(function(response){
+            Dispatcher.dispatch({
+                actionType: ActionTypes.CREATE_OOP
+            });
+        });
+    },
+
     loadServedClients: function(){
         axios.get(url + 'oop')
+            .then(function(response){
+                Dispatcher.dispatch({
+                    actionType: ActionTypes.LOAD_ALL_DATA,
+                    data: response.data
+                });
+        });
+    },
+
+    loadServedClientsPromise: function(){
+        return axios.get(url + 'oop')
             .then(function(response){
                 Dispatcher.dispatch({
                     actionType: ActionTypes.LOAD_ALL_DATA,
@@ -51851,7 +51924,7 @@ var HttpActions = {
 
 module.exports = HttpActions;
 
-},{"../constants/actionTypes":256,"../dispatcher/appDispatcher":257,"axios":1}],233:[function(require,module,exports){
+},{"../constants/actionTypes":257,"../dispatcher/appDispatcher":258,"axios":1}],233:[function(require,module,exports){
 "use strict";
 
 var Dispatcher = require('../dispatcher/appDispatcher');
@@ -51874,7 +51947,7 @@ var InitializeActions = {
 
 module.exports = InitializeActions;
 
-},{"../api/authorApi":234,"../api/courseApi":236,"../constants/actionTypes":256,"../dispatcher/appDispatcher":257}],234:[function(require,module,exports){
+},{"../api/authorApi":234,"../api/courseApi":236,"../constants/actionTypes":257,"../dispatcher/appDispatcher":258}],234:[function(require,module,exports){
 "use strict";
 
 //This file is mocking a web API by hitting hard coded data.
@@ -52235,7 +52308,7 @@ var Authors = React.createClass({displayName: "Authors",
 
 module.exports = Authors;
 
-},{"../../actions/authorActions":230,"../../stores/authorStore":260,"./authorList":241,"react":228,"react-router":59}],243:[function(require,module,exports){
+},{"../../actions/authorActions":230,"../../stores/authorStore":261,"./authorList":241,"react":228,"react-router":59}],243:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -52329,7 +52402,7 @@ var ManageAuthorPage = React.createClass({displayName: "ManageAuthorPage",
 
 module.exports = ManageAuthorPage;
 
-},{"../../actions/authorActions":230,"../../stores/authorStore":260,"./authorForm":240,"react":228,"react-router":59,"toastr":229}],244:[function(require,module,exports){
+},{"../../actions/authorActions":230,"../../stores/authorStore":261,"./authorForm":240,"react":228,"react-router":59,"toastr":229}],244:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -52408,7 +52481,7 @@ var SelectItem = React.createClass({displayName: "SelectItem",
 
 module.exports = SelectItem;
 
-},{"../../stores/authorStore":260,"react":228}],246:[function(require,module,exports){
+},{"../../stores/authorStore":261,"react":228}],246:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -52544,7 +52617,7 @@ var ManageCourse = React.createClass({displayName: "ManageCourse",
 
 module.exports = ManageCourse;
 
-},{"../../actions/courseActions":231,"../../stores/authorStore":260,"../../stores/courseStore":261,"./courseForm":248,"react":228,"react-router":59,"toastr":229}],248:[function(require,module,exports){
+},{"../../actions/courseActions":231,"../../stores/authorStore":261,"../../stores/courseStore":262,"./courseForm":248,"react":228,"react-router":59,"toastr":229}],248:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -52692,7 +52765,7 @@ var Courses = React.createClass({displayName: "Courses",
 
 module.exports = Courses;
 
-},{"../../stores/courseStore":261,"./courseList":249,"react":228,"react-router":59}],251:[function(require,module,exports){
+},{"../../stores/courseStore":262,"./courseList":249,"react":228,"react-router":59}],251:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -52751,6 +52824,7 @@ var UniStore = require('../../stores/uniStore');
 var HttpActions = require('../../actions/httpActions');
 var Router = require('react-router');
 var toastr = require('toastr');
+var Link = Router.Link;
 
 var OOP = React.createClass({displayName: "OOP",
     
@@ -52760,8 +52834,16 @@ var OOP = React.createClass({displayName: "OOP",
             data: UniStore.getServedClients()
         };
     },
+    componentWillMount: function(){
+        UniStore.addChangeListener(this._onChange);
+    },
+
+    _onChange: function(){
+        this.setState({data: UniStore.getServedClients()});
+    },
 
     componentWillUnmount: function(){
+        UniStore.removeChangeListener(this._onChange);
         HttpActions.loadServedClients();
     },
 
@@ -52778,23 +52860,35 @@ var OOP = React.createClass({displayName: "OOP",
                 toastr.success('Seller ' + name + ' has ' + response.data + ' minutes total time serving clients');
             });
     },
-    render: function(){
 
+    delete: function(id, event){
+        event.preventDefault();
+
+        HttpActions.deletePromise(id)
+            .then(function(response){
+                HttpActions.loadServedClients();
+                toastr.success('row deleted');
+                });     
+    },
+
+    render: function(){
         var mapRow = function(data){
             return (
             React.createElement("tr", null, 
+                React.createElement("td", null, React.createElement("a", {href: "#", onClick: this.delete.bind(this, data.id)}, "Delete")), 
                 React.createElement("td", null, React.createElement("a", {href: "#", onClick: this.callApiMethods.bind(this, data.seller)}, data.seller)), 
                 React.createElement("td", null, data.client), 
                 React.createElement("td", null, data.minutes)
             ) );
         };
 
-        console.log("in render of oop component", this.state.data);
         return (
             React.createElement("div", null, 
                 React.createElement("h1", null, "OOP 2 component"), 
+                React.createElement(Link, {className: "btn btn-default", to: "addRow"}, "Add"), 
                 React.createElement("table", {className: "table"}, 
                 React.createElement("thead", null, 
+                    React.createElement("th", null), 
                     React.createElement("th", null, "Seller"), 
                     React.createElement("th", null, "Client"), 
                     React.createElement("th", null, "Working time")
@@ -52810,7 +52904,84 @@ var OOP = React.createClass({displayName: "OOP",
 
 module.exports = OOP;
 
-},{"../../actions/httpActions":232,"../../stores/uniStore":262,"react":228,"react-router":59,"toastr":229}],255:[function(require,module,exports){
+},{"../../actions/httpActions":232,"../../stores/uniStore":263,"react":228,"react-router":59,"toastr":229}],255:[function(require,module,exports){
+"use strict";
+
+var React = require('react');
+var Router = require('react-router');
+var HttpActions = require('../../actions/httpActions');
+var TextInput = require('../common/textInput');
+var toastr = require('toastr');
+
+var OOPAdd = React.createClass({displayName: "OOPAdd",
+    mixins: [
+        Router.Navigation
+    ],
+    getInitialState: function(){
+        return {
+            row: {
+            seller: "",
+            client: "",
+            minutes: ""},
+        errors: {}
+    };
+    },
+
+    setRowState: function(event){
+        var field = event.target.name;
+        var value = event.target.value;
+        this.state.row[field] = value;
+
+        return this.setState({row: this.state.row});
+    },
+
+    onSave: function(event){
+        event.preventDefault();
+
+        HttpActions.addPromise(this.state.row)
+            .then(function(resp){
+        HttpActions.loadServedClientsPromise()
+        .then(function(response){
+            toastr.success('Row saved.');           
+        });      
+    });
+        this.transitionTo('oop');
+    },
+
+    render: function(){
+        return (
+            React.createElement("form", null, 
+                React.createElement(TextInput, {
+                    name: "seller", 
+                    label: "Seller", 
+                    value: this.state.row.seller, 
+                    onChange: this.setRowState, 
+                    error: this.state.errors.seller}), 
+                React.createElement(TextInput, {
+                    name: "client", 
+                    label: "Client", 
+                    value: this.state.row.client, 
+                    onChange: this.setRowState, 
+                    error: this.state.errors.client}), 
+                React.createElement(TextInput, {
+                    name: "minutes", 
+                    label: "Working Minutes", 
+                    value: this.state.row.minutes, 
+                    onChange: this.setRowState, 
+                    error: this.state.errors.minutes}), 
+                React.createElement("div", {className: "form-group row"}, 
+                    React.createElement("div", {className: "col-md-2"}, 
+                        React.createElement("input", {type: "submit", value: "Save", className: "btn btn-default", onClick: this.onSave})
+                    )
+                )
+            )
+        );
+    }
+});
+
+module.exports = OOPAdd;
+
+},{"../../actions/httpActions":232,"../common/textInput":246,"react":228,"react-router":59,"toastr":229}],256:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -52885,7 +53056,7 @@ var Conducting = React.createClass({displayName: "Conducting",
 
 module.exports = Conducting;
 
-},{"../../actions/httpActions":232,"../../stores/uniStore":262,"react":228,"react-router":59}],256:[function(require,module,exports){
+},{"../../actions/httpActions":232,"../../stores/uniStore":263,"react":228,"react-router":59}],257:[function(require,module,exports){
 "use strict";
 
 var keyMirror = require('react/lib/keyMirror');
@@ -52901,15 +53072,18 @@ module.exports = keyMirror({
     LOAD_CONDUCTING_INFO: null,
     LOAD_ALL_DATA: null,
     LOAD_SERVED_CLIENTS_BY_NAME: null,
-    LOAD_TOTAL_TIME_SERVED_CLIENTS_BY_NAME: null
+    LOAD_TOTAL_TIME_SERVED_CLIENTS_BY_NAME: null,
+    DELETE_OOP: null,
+    CREATE_OOP: null,
+    UPDATE_OOP: null
 });
 
-},{"react/lib/keyMirror":213}],257:[function(require,module,exports){
+},{"react/lib/keyMirror":213}],258:[function(require,module,exports){
 var Dispatcher = require('flux').Dispatcher;
 
 module.exports = new Dispatcher();
 
-},{"flux":27}],258:[function(require,module,exports){
+},{"flux":27}],259:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -52925,7 +53099,7 @@ HttpActions.loadServedClients();
 Router.run(routes, function(Handler){
     React.render(React.createElement(Handler, null), document.getElementById('app'));
 });
-},{"./actions/httpActions":232,"./actions/initializeActions":233,"./routes":259,"react":228,"react-router":59}],259:[function(require,module,exports){
+},{"./actions/httpActions":232,"./actions/initializeActions":233,"./routes":260,"react":228,"react-router":59}],260:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -52953,13 +53127,14 @@ var routes = (
         React.createElement(Redirect, {from: "about/*", to: "about"}), 
 
         React.createElement(Route, {name: "sbd", handler: require('./components/uni/sbd')}), 
-        React.createElement(Route, {name: "oop", handler: require('./components/uni/oop')})
+        React.createElement(Route, {name: "oop", handler: require('./components/uni/oop')}), 
+        React.createElement(Route, {name: "addRow", handler: require('./components/uni/oopAdd')})
     )
 );
 
 module.exports = routes;
 
-},{"./components/about/aboutPage":238,"./components/app":239,"./components/authors/authorPage":242,"./components/authors/manageAuthorPage":243,"./components/courses/courseAddEdit":247,"./components/courses/coursesPage":250,"./components/homePage":251,"./components/notFoundPage":252,"./components/test":253,"./components/uni/oop":254,"./components/uni/sbd":255,"react":228,"react-router":59}],260:[function(require,module,exports){
+},{"./components/about/aboutPage":238,"./components/app":239,"./components/authors/authorPage":242,"./components/authors/manageAuthorPage":243,"./components/courses/courseAddEdit":247,"./components/courses/coursesPage":250,"./components/homePage":251,"./components/notFoundPage":252,"./components/test":253,"./components/uni/oop":254,"./components/uni/oopAdd":255,"./components/uni/sbd":256,"react":228,"react-router":59}],261:[function(require,module,exports){
 "use strict";
 
 var Dispatcher = require('../dispatcher/appDispatcher');
@@ -53027,7 +53202,7 @@ Dispatcher.register(function(action){
 
 module.exports = AuthorStore;
 
-},{"../constants/actionTypes":256,"../dispatcher/appDispatcher":257,"../utils":263,"events":26,"lodash":32,"object-assign":33}],261:[function(require,module,exports){
+},{"../constants/actionTypes":257,"../dispatcher/appDispatcher":258,"../utils":264,"events":26,"lodash":32,"object-assign":33}],262:[function(require,module,exports){
 "use strict";
 
 var Dispatcher = require('../dispatcher/appDispatcher');
@@ -53093,7 +53268,7 @@ Dispatcher.register(function(action){
 
 module.exports = CourseStore;
 
-},{"../constants/actionTypes":256,"../dispatcher/appDispatcher":257,"../utils":263,"events":26,"lodash":32,"object-assign":33}],262:[function(require,module,exports){
+},{"../constants/actionTypes":257,"../dispatcher/appDispatcher":258,"../utils":264,"events":26,"lodash":32,"object-assign":33}],263:[function(require,module,exports){
 "use strict";
 
 var Dispatcher = require('../dispatcher/appDispatcher');
@@ -53113,6 +53288,15 @@ var UniStore = assign({}, EventEmitter.prototype, {
     },
     getServedClients: function(){
         return Utils._clone(servedClients);
+    },
+    addChangeListener: function(callback){
+        this.on(CHANGE_EVENT, callback);
+    },
+    removeChangeListener: function(callback){
+        this.removeListener(CHANGE_EVENT, callback);
+    },
+    emitChange: function(){
+        this.emit(CHANGE_EVENT);
     }
 });
 
@@ -53121,10 +53305,16 @@ Dispatcher.register(function(action){
     switch(action.actionType){
         case ActionTypes.LOAD_CONDUCTING_INFO :{
             conductingInfo = action.data;
+            UniStore.emitChange();
             break;
         }
         case ActionTypes.LOAD_ALL_DATA :{
             servedClients = action.data;
+            UniStore.emitChange();
+            break;
+        }
+        case ActionTypes.CREATE_OOP: {
+            UniStore.emitChange();
             break;
         }
     }
@@ -53132,7 +53322,7 @@ Dispatcher.register(function(action){
 
 module.exports = UniStore;
 
-},{"../constants/actionTypes":256,"../dispatcher/appDispatcher":257,"../utils":263,"events":26,"lodash":32,"object-assign":33}],263:[function(require,module,exports){
+},{"../constants/actionTypes":257,"../dispatcher/appDispatcher":258,"../utils":264,"events":26,"lodash":32,"object-assign":33}],264:[function(require,module,exports){
 "use strict";
 
 var Utils = {
@@ -53143,4 +53333,4 @@ var Utils = {
 
 module.exports = Utils;
 
-},{}]},{},[258]);
+},{}]},{},[259]);
