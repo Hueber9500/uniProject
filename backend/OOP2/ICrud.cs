@@ -12,5 +12,13 @@ namespace OOP2
         void Update(T obj, int id);
 
         void Delete(int id);
+
+        void Add(T obj);
+
+        void Commit();
+
+        int CalculateServedClientsCountBySellerName(string name);
+
+        int CalculateTotalMinutesForServingBySellerName(string name);
     }
 }

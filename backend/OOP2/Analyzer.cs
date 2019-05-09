@@ -48,7 +48,7 @@ namespace OOP2
         public IEnumerable<Service> Read()
         {
             _services = _db.ServiceModels
-                .Select(sm => new Service(sm.SellerName, sm.Client, sm.WorkingMinutes))
+                .Select(sm => new Service(sm.SellerName, sm.Client, sm.WorkingMinutes) { Id = sm.Id})
                 .ToList();
 
             return _services;
@@ -56,12 +56,12 @@ namespace OOP2
 
         public int CalculateServedClientsCountBySellerName(string sellerName)
         {
-            return _services.Count();
+            return _services.Count(it => it.Seller == sellerName);
         }
 
         public int CalculateTotalMinutesForServingBySellerName(string sellerName)
         {
-            return _services.Sum(item => item.Minutes);
+            return _services.Where(it=>it.Seller == sellerName).Sum(item => item.Minutes);
         }
 
         public List<int> GetClientsServedBySeller(string sellerName)
@@ -69,6 +69,16 @@ namespace OOP2
             return _services
                 .Select(item => item.Client)
                 .ToList();
+        }
+
+        public void Add(Service obj)
+        {
+            _db.Add<ServiceModel>(new ServiceModel()
+            {
+                Client          = obj.Client,
+                SellerName      = obj.Seller,
+                WorkingMinutes  = obj.Minutes
+            });
         }
     }
 }

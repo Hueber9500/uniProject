@@ -1,0 +1,19 @@
+
+{
+    "comment" : "This file is used to help set default values when using the dotnet CLI extension Amazon.ElasticBeanstalk.Tools. For more information run \"dotnet eb --help\" from the project root.",
+    "profile" : "MSS",
+    "region"  : "eu-central-1",
+    "application" : "SBDOOP",
+    "environment" : "SBDOOP-test",
+    "cname"       : "sbdoop-test",
+    "solution-stack" : "64bit Windows Server Core 2012 R2 v2.0.3 running IIS 8.5",
+    "environment-type" : "SingleInstance",
+    "instance-profile" : "aws-elasticbeanstalk-ec2-role",
+    "service-role"     : "AWSEBCustom",
+    "health-check-url" : "/",
+    "instance-type"    : "t2.micro",
+    "key-pair"         : "mssfinal",
+    "iis-website"      : "Default Web Site",
+    "app-path"         : "/",
+    "enable-xray"      : false
+}

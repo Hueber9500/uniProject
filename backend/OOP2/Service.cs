@@ -39,6 +39,7 @@ namespace OOP2
         #endregion
 
         #region Public properties
+        public int Id { get; set; }
         public string Seller { get => _sellerName; private set => _sellerName = value; }
         public int Client { get => _clientNumber; private set => _clientNumber = value; }
         public int Minutes { get => _serviceDurationInMinutes; private set => _serviceDurationInMinutes = value; }
