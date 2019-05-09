@@ -1,0 +1,17 @@
+D:\Programming\Projects\SBDOOP\SBDOOP\bin\Debug\netcoreapp2.2\SBDOOP.deps.json
+D:\Programming\Projects\SBDOOP\SBDOOP\bin\Debug\netcoreapp2.2\SBDOOP.runtimeconfig.json
+D:\Programming\Projects\SBDOOP\SBDOOP\bin\Debug\netcoreapp2.2\SBDOOP.runtimeconfig.dev.json
+D:\Programming\Projects\SBDOOP\SBDOOP\bin\Debug\netcoreapp2.2\SBDOOP.dll
+D:\Programming\Projects\SBDOOP\SBDOOP\bin\Debug\netcoreapp2.2\SBDOOP.pdb
+D:\Programming\Projects\SBDOOP\SBDOOP\obj\Debug\netcoreapp2.2\SBDOOP.csproj.CoreCompileInputs.cache
+D:\Programming\Projects\SBDOOP\SBDOOP\obj\Debug\netcoreapp2.2\SBDOOP.RazorAssemblyInfo.cache
+D:\Programming\Projects\SBDOOP\SBDOOP\obj\Debug\netcoreapp2.2\SBDOOP.RazorAssemblyInfo.cs
+D:\Programming\Projects\SBDOOP\SBDOOP\obj\Debug\netcoreapp2.2\SBDOOP.AssemblyInfoInputs.cache
+D:\Programming\Projects\SBDOOP\SBDOOP\obj\Debug\netcoreapp2.2\SBDOOP.AssemblyInfo.cs
+D:\Programming\Projects\SBDOOP\SBDOOP\obj\Debug\netcoreapp2.2\SBDOOP.RazorTargetAssemblyInfo.cache
+D:\Programming\Projects\SBDOOP\SBDOOP\obj\Debug\netcoreapp2.2\SBDOOP.dll
+D:\Programming\Projects\SBDOOP\SBDOOP\obj\Debug\netcoreapp2.2\SBDOOP.pdb
+D:\Programming\Projects\SBDOOP\SBDOOP\bin\Debug\netcoreapp2.2\OOP2.dll
+D:\Programming\Projects\SBDOOP\SBDOOP\bin\Debug\netcoreapp2.2\OOP2.pdb
+D:\Programming\Projects\SBDOOP\SBDOOP\obj\Debug\netcoreapp2.2\SBDOOP.csprojAssemblyReference.cache
+D:\Programming\Projects\SBDOOP\SBDOOP\obj\Debug\netcoreapp2.2\SBDOOP.csproj.CopyComplete
