@@ -6,6 +6,7 @@ $ = jQuery = require('jquery');
 
 var App = React.createClass({ 
     render: function(){
+        console.log("in App component");
         return (<div>
                 <Header />
                 <div className="container-fluid">

@@ -8,7 +8,6 @@ var toastr = require('toastr');
 var Link = Router.Link;
 
 var OOP = React.createClass({
-    
     getInitialState: function(){
         console.log('get intial state of oop component', UniStore.getServedClients());
         return {

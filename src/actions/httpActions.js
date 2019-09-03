@@ -4,9 +4,46 @@ var Dispatcher = require('../dispatcher/appDispatcher');
 var ActionTypes = require('../constants/actionTypes');
 var axios = require('axios');
 
-var url = 'http://sbdoop-test.eu-central-1.elasticbeanstalk.com/';
+var url = 'http://192.168.0.247:5920';
 
 var HttpActions = {
+    loadEmployeeArrivalHistory: function(requestData){
+        console.log('load employee history', requestData);
+        var destinationUrl = url + '/api/history';
+
+        axios.get(destinationUrl, {
+            params: requestData         
+        }).then(function(response){
+            var metaData = JSON.parse(response.headers['x-pagination']);
+            var employees = response.data;
+
+            Dispatcher.dispatch({
+                actionType: ActionTypes.HISTORY,
+                data: employees,
+                meta: metaData
+            });    
+        });
+    },
+    connectToMonitoringService: function(connectionId){
+        console.log('from http action', connectionId);
+        var destinationUrl = url + '/api/subscribe';
+        return axios({
+            method: 'post',
+            url: destinationUrl,
+            headers: {'Content-Type': 'application/json'},
+            data: {
+                ConnectionId: connectionId                
+            }
+        }).then(function(response){
+            console.log(response);
+        });
+    },
+    employeesArrival: function(employees){
+        Dispatcher.dispatch({
+            actionType: ActionTypes.LOAD_EMPLOYEE_ARRIVAL,
+            data: employees
+        });
+    },
     loadConductingInfo: function(){        
         axios.get(url + 'sbd')
         .then(function(response){

@@ -16,5 +16,7 @@ module.exports = keyMirror({
     LOAD_TOTAL_TIME_SERVED_CLIENTS_BY_NAME: null,
     DELETE_OOP: null,
     CREATE_OOP: null,
-    UPDATE_OOP: null
+    UPDATE_OOP: null,
+    LOAD_EMPLOYEE_ARRIVAL: null,
+    HISTORY: null
 });
