@@ -1,1 +1,2 @@
 "# uniProject" 
+Small SPA application
